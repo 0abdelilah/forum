@@ -1,0 +1,45 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="./static/styles.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <!-- Drop down -->
+        <label>Filter by:</label>
+
+        <select name="filter" id="filter" onchange="Filter(this.value);">
+            <option value="category">Category</option>
+            <option value="posts">My Posts</option>
+            <option value="liked">Liked Posts</option>
+        </select>
+
+
+        <div class="usermenu" tabindex="0">
+            {{if .Authenticated}}
+            <svg viewBox="0 0 100 80" width="25" height="25">
+                <rect width="100" height="20" fill="white" />
+                <rect y="30" width="100" height="20" fill="white" />
+                <rect y="60" width="100" height="20" fill="white" />
+            </svg>
+            <div class="dropdown-content">
+                <img src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg" />
+                <a href="/logout" class="logout-button">Logout</a>
+            </div>
+            {{else}}
+            <!-- Login/Register -->
+            <a href="/auth" class="login-button">Login</a>
+            {{end}}
+        </div>
+
+
+    </div>
+
+
+    <div class="posts">
+        <div class="post">
+            <img src="">
+        </div>
+
+    </div>
+
+</body>

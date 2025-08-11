@@ -1,0 +1,76 @@
+## **Header / Navigation Bar**
+
+* **Logout button** (only visible when logged in)
+* **Login & Register buttons** (only visible when logged out)
+* **Filter menu / dropdown**
+
+  * By category (available to everyone)
+  * By "My Posts" (only for logged-in users)
+  * By "Liked Posts" (only for logged-in users)
+
+---
+
+## **Home / Main Page**
+
+* **List of posts** (visible to everyone)
+
+  * Post title, author, date, category tags
+  * Like & dislike counters
+  * Like / dislike buttons (only for logged-in users)
+
+---
+
+## **Post Page** (single post view)
+
+* Full post content
+* Post categories
+* Like/dislike system for the post (only for logged-in users)
+* **Comments section**
+
+  * List of comments (visible to everyone)
+  * Like/dislike system for comments (only for logged-in users)
+  * Add comment form (only for logged-in users)
+
+---
+
+## **Authentication Pages**
+
+* **Login page**
+
+  * Email
+  * Password
+  * Error display for wrong credentials
+* **Register page**
+
+  * Email (error if already taken)
+  * Username
+  * Password (encrypted in DB)
+  * Password strength check
+
+---
+
+## **Post Creation Page** (only logged-in users)
+
+* Title
+* Content
+* Category selection (multi-select possible)
+* Submit button
+
+---
+
+## **Technical Features (Backend / Hidden)**
+
+* SQLite database
+* Sessions & cookies for authentication
+* Password encryption with bcrypt
+* UUID for session IDs (bonus)
+* Docker containerization
+* HTTP error handling & validation
+* At least one `CREATE`, `INSERT`, and `SELECT` query in SQLite
+
+
+
+    --background-color-01: hsl(var(--hue), 12%, 6%);
+    --background-color-02: hsl(var(--hue), 12%, 12%);
+    --hero-background-color-01: hsl(250, 24%, 12%);
+    --hero-background-color-02: hsl(250, 24%, 30%);

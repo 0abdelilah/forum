@@ -1,0 +1,67 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="./static/auth.css">
+</head>
+
+<body>
+    <div class="authmenu">
+        <div id="login">
+            <form action="/login" method="post">
+                <input minlength="4" maxlength="20" type="text" name="username" placeholder="Enter username" required>
+                <input minlength="4" maxlength="20" type="password" name="password" placeholder="Enter password"
+                    required>
+                <button type="submit">Login</button>
+            </form>
+            {{if .Text}}
+            <div class="ToastError">{{.Text}}</div>
+            {{end}}
+
+            <a href="#register" style="display:inline-block; color:white; text-decoration:none; border-radius:5px;">
+                Don't have an account?
+            </a>
+        </div>
+        <div id="register">
+            <form action="/register" method="post">
+                <input type="text" name="username" placeholder="Enter username" required>
+                <input type="email" name="email" placeholder="Enter email" required>
+                <input type="password" name="password" placeholder="Enter password" minlength="4" maxlength="20"
+                    required>
+                <input type="password" name="re-password" placeholder="Re-Enter password" minlength="4" maxlength="20"
+                    required>
+
+
+                <button type="submit">Register</button>
+            </form>
+            {{if .Text}}
+            <div class="ToastError">{{.Text}}</div>
+            {{end}}
+            <a href="#login" style="display:inline-block; color:white; text-decoration:none; border-radius:5px;">
+                Already have an account?
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        function checkHash() {
+            { { if .Hash} }
+            window.location.hash = "{{.Hash}}";
+            { { end } }
+            const hash = window.location.hash;
+
+            if (hash === "#register") {
+                document.getElementById("register").style.display = 'block';
+                document.getElementById("login").style.display = 'none';
+            } else {
+                // Par défaut, afficher login
+                document.getElementById("login").style.display = 'block';
+                document.getElementById("register").style.display = 'none';
+            }
+        }
+
+        // Appeler au chargement
+        window.addEventListener('DOMContentLoaded', checkHash);
+
+        // Appeler à chaque changement de hash
+        window.addEventListener('hashchange', checkHash);
+    </script>
+</body>
