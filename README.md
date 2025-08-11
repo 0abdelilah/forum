@@ -68,9 +68,3 @@
 * HTTP error handling & validation
 * At least one `CREATE`, `INSERT`, and `SELECT` query in SQLite
 
-
-
-    --background-color-01: hsl(var(--hue), 12%, 6%);
-    --background-color-02: hsl(var(--hue), 12%, 12%);
-    --hero-background-color-01: hsl(250, 24%, 12%);
-    --hero-background-color-02: hsl(250, 24%, 30%);

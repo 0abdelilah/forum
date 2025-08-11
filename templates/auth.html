@@ -2,6 +2,8 @@
     <link rel="stylesheet" type="text/css" href="./static/auth.css">
 </head>
 
+
+
 <body>
     <div class="authmenu">
         <div id="login">
@@ -11,11 +13,11 @@
                     required>
                 <button type="submit">Login</button>
             </form>
-            {{if .Text}}
-            <div class="ToastError">{{.Text}}</div>
+            {{if .Error}}
+            <div class="ToastError">{{.Error}}</div>
             {{end}}
 
-            <a href="#register" style="display:inline-block; color:white; text-decoration:none; border-radius:5px;">
+            <a href="#register" style="display:inline-block; color:white; text-decoration:none;">
                 Don't have an account?
             </a>
         </div>
@@ -34,7 +36,7 @@
             {{if .Text}}
             <div class="ToastError">{{.Text}}</div>
             {{end}}
-            <a href="#login" style="display:inline-block; color:white; text-decoration:none; border-radius:5px;">
+            <a href="#login" style="display:inline-block; color:white; text-decoration:none;">
                 Already have an account?
             </a>
         </div>
@@ -43,9 +45,9 @@
 
     <script>
         function checkHash() {
-            { { if .Hash} }
+            {{if .Hash}}
             window.location.hash = "{{.Hash}}";
-            { { end } }
+            {{end}}
             const hash = window.location.hash;
 
             if (hash === "#register") {

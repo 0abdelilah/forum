@@ -1,9 +1,8 @@
-package handlers
+package auth
 
 import (
-	"fmt"
 	"forum/database"
-	"html/template"
+	"forum/utils"
 	"net/http"
 	"regexp"
 )
@@ -17,29 +16,29 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	// verify feilds //
 
 	if !isValidUser(username) {
-		ToastError(w, "Username too long", "medium")
+		utils.ToastError(w, "Username too long", "register")
 		return
 	}
 
 	if !isValidEmail(email) {
-		ToastError(w, "Invalid email", "medium")
+		utils.ToastError(w, "Invalid email", "register")
 		return
 	}
 
 	if !isValidPassword(password) {
-		ToastError(w, "Invalid password", "medium")
+		utils.ToastError(w, "Invalid password", "register")
 		return
 	}
 
 	if password != re_password {
-		ToastError(w, "Passwords dont match", "register")
+		utils.ToastError(w, "Passwords dont match", "register")
 		return
 	}
 
 	// register user
 	err := database.Register(username, email, password)
 	if err != nil {
-		fmt.Println("Error registering user")
+		utils.ErrorHandler(w, "Internal server error", 500)
 		return
 	}
 }
@@ -74,24 +73,4 @@ func isValidPassword(password string) bool {
 		return re.MatchString(passRegex)
 	*/
 	return len(password) > 4 && len(password) < 20
-}
-
-func ToastError(w http.ResponseWriter, text string, hash string) {
-	tmpt, err := template.ParseFiles("./templates/auth.html")
-	if err != nil {
-		http.Error(w, "Template parsing error", http.StatusInternalServerError)
-		return
-	}
-
-	err = tmpt.Execute(w, struct {
-		Text string
-		Hash string
-	}{
-		Text: text,
-		Hash: hash,
-	})
-	if err != nil {
-		http.Error(w, "Template execution error", http.StatusInternalServerError)
-		return
-	}
 }

@@ -17,12 +17,14 @@ func main() {
 	// start mux
 	mux := http.NewServeMux()
 
-	// handle patterns
-	mux.HandleFunc("GET /", handlers.HomeHandler)
+	// handle authentication patterns
+	mux.HandleFunc("GET /static/", handlers.StaticHandler)
+
+	mux.HandleFunc("GET /", handlers.DashboardHandler)
+	mux.HandleFunc("GET /auth", auth.AuthHandler)
+	mux.HandleFunc("POST /register", auth.RegisterHandler)
+	mux.HandleFunc("POST /login", auth.LoginHandler)
 	mux.HandleFunc("GET /logout", auth.LogoutHandler)
-	mux.HandleFunc("GET /auth", handlers.AuthHandler)
-	mux.HandleFunc("POST /register", handlers.RegisterHandler)
-	mux.HandleFunc("POST /login", handlers.LoginHandler)
 
 	// start server
 	fmt.Println("started listening at http://localhost:8080/auth#register")

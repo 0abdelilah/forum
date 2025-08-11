@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"forum/auth"
 	"forum/utils"
 	"html/template"
@@ -22,23 +21,29 @@ type Post struct {
 	CommentCount int
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
+func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		utils.ErrorHandler(w, "Internal server error", 500)
+		utils.ErrorHandler(w, "This page does not exist.", 404)
 		return
 	}
 
-	tmpt, err := template.ParseFiles("./templates/index.html")
+	tmpt, err := template.ParseFiles("./templates/dashboard.html")
 	if err != nil {
-		print("templates/index.html")
-		fmt.Println("cant parse")
 		utils.ErrorHandler(w, "Internal server error", 500)
 		return
 	}
 
-	fmt.Println("serving", r.URL.Path)
 	var user UserData
-	user.Authenticated = auth.IsAuthenticated()
-	user.Name = "Abdelilah"
+
+	Sess, Auth := auth.GetSession(r)
+
+	user.Authenticated = Auth
+	user.Name = Sess.Username
 	tmpt.Execute(w, user)
+}
+
+func StaticHandler(w http.ResponseWriter, r *http.Request) {
+	http.StripPrefix("/static/",
+		http.FileServer(http.Dir("./templates/static")),
+	).ServeHTTP(w, r)
 }
