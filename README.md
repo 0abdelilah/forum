@@ -43,7 +43,7 @@
 * **Register page**
 
   * Email (error if already taken)
-  * Username
+  * Username (error if already taken)
   * Password (encrypted in DB)
   * Password strength check
 
@@ -58,13 +58,12 @@
 
 ---
 
-## **Technical Features (Backend / Hidden)**
+## **Backend Technical Features**
 
 * SQLite database
 * Sessions & cookies for authentication
 * Password encryption with bcrypt
-* UUID for session IDs (bonus)
+* UUID for session IDs
 * Docker containerization
 * HTTP error handling & validation
-* At least one `CREATE`, `INSERT`, and `SELECT` query in SQLite
 
