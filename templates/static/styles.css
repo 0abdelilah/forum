@@ -31,12 +31,11 @@
     border: 1px solid #ccc;
 }
 
-.dropdown-content img {
+.usermenu usermenuimg {
     width: 42px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    
 }
 
 .usermenu:focus-within .dropdown-content {
