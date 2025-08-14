@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"forum/utils"
 	"html/template"
 	"net/http"
 )
@@ -9,7 +8,7 @@ import (
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	tmpt, err := template.ParseFiles("./templates/auth.html")
 	if err != nil {
-		utils.ErrorHandler(w, "Internal server error", 500)
+		http.Error(w, "Internal server error", 500)
 		return
 	}
 

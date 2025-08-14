@@ -1,12 +1,16 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="./static/styles.css">
+    <link rel="stylesheet" type="text/css" href="./static/dashboard.css">
     <link rel="stylesheet" type="text/css" href="./static/auth.css">
+    <link rel="stylesheet" type="text/css" href="./static/styles.css">
+
+    <script src="./static/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
+
 <body class="dashboard-page">
     <div class="navbar">
-        <h2>Forum</h2>
+        <h2>For<span class="highlight">um</span></h2>
         <!-- Drop down -->
         <label>Filter by:</label>
 
@@ -16,15 +20,13 @@
             <option value="liked">Liked Posts</option>
         </select>
 
-
         <div class="usermenu" tabindex="0">
-
             {{if .Authenticated}}
             <img src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg" />
-            
+
             <div class="dropdown-content">
                 <h3 style="color:black;">{{.Name}}</h3>
-                
+
                 <a href="/logout" class="logout-button">Logout</a>
             </div>
             {{else}}
@@ -34,10 +36,32 @@
         </div>
     </div>
 
-    <div class="posts">
-        <div class="post">
-            <img src="">
+
+    <div class="create-post">
+        <input type="checkbox" id="show">
+
+        {{if .Authenticated}}
+        <label for="show">What's on your mind, {{.Name}}?</label>
+        {{else}}
+        <label for="unauth" onclick="window.location='/auth#login'">Login to create posts</label>
+        {{end}}
+
+        <div id="popup">
+            <label for="show" class="close-btn" aria-label="Close popup">X</label>
+            <form>
+                <h4>Create post</h4>
+                <input id="title" placeholder="Title" required>
+                <textarea id="content" placeholder="Whats on your mind?" required></textarea>
+                <select id="category">
+                    <option value="programming">Programming</option>
+                    <option value="music">Music</option>
+                    <option value="gaming">Gaming</option>
+                </select>
+                <button type="button" onclick="CreatePost()">Post</button>
+            </form>
         </div>
     </div>
 
+    <div class="posts"></div>
+    <script>loadPosts();</script>
 </body>

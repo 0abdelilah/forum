@@ -1,67 +1,34 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./static/auth.css">
+    <script src="./static/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
+<style>
+    
+</style>
 <body class="auth-page">
     <div class="authmenu">
-        <div id="login">
-            <form action="/login" method="post">
-                <input minlength="4" maxlength="20" type="text" name="username" placeholder="Enter username" required>
-                <input minlength="4" maxlength="20" type="password" name="password" placeholder="Enter password"
-                    required>
-                <button type="submit">Login</button>
-            </form>
-            {{if .Error}}
-            <div class="ToastError">{{.Error}}</div>
-            {{end}}
-
+        <div id="loginForm">
+            <input id="username" minlength="4" maxlength="20" type="text" name="username" placeholder="Enter username"
+                required>
+            <input id="password" minlength="4" maxlength="20" type="password" name="password"
+                placeholder="Enter password" required>
+            <button type="button" onclick="Login()">Login</button>
             <a href="#register" style="display:inline-block; color:white; text-decoration:none;">
                 Don't have an account?
             </a>
         </div>
-        <div id="register">
-            <form action="/register" method="post">
-                <input type="text" name="username" placeholder="Enter username" required>
-                <input type="email" name="email" placeholder="Enter email" required>
-                <input type="password" name="password" placeholder="Enter password" minlength="4" maxlength="20"
-                    required>
-                <input type="password" name="re-password" placeholder="Re-Enter password" minlength="4" maxlength="20"
-                    required>
 
+        <div id="registerForm">
+            <input id="r_username" type="text" name="username" placeholder="Enter username" required>
+            <input id="email" type="email" name="email" placeholder="Enter email" minlength="4" maxlength="20" required>
+            <input id="r_password" type="password" name="password" placeholder="Enter password" minlength="4"
+                maxlength="20" required>
 
-                <button type="submit">Register</button>
-            </form>
-            {{if .Text}}
-            <div class="ToastError">{{.Text}}</div>
-            {{end}}
+            <button type="button" onclick="Register()">Register</button>
             <a href="#login" style="display:inline-block; color:white; text-decoration:none;">
                 Already have an account?
             </a>
         </div>
     </div>
-
-
-    <script>
-        function checkHash() {
-            {{if .Hash}}
-            window.location.hash = "{{.Hash}}";
-            {{end}}
-            const hash = window.location.hash;
-
-            if (hash === "#register") {
-                document.getElementById("register").style.display = 'block';
-                document.getElementById("login").style.display = 'none';
-            } else {
-                // Par défaut, afficher login
-                document.getElementById("login").style.display = 'block';
-                document.getElementById("register").style.display = 'none';
-            }
-        }
-
-        // Appeler au chargement
-        window.addEventListener('DOMContentLoaded', checkHash);
-
-        // Appeler à chaque changement de hash
-        window.addEventListener('hashchange', checkHash);
-    </script>
 </body>

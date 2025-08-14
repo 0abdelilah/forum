@@ -33,8 +33,9 @@ body.auth-page{
     gap: 40px;
 }
 
-form {
-    display: flex;
+#registerForm,
+#loginForm {
+    display: flex !important;
     flex-direction: column;
     gap: 15px;
     min-width: 300px;
@@ -56,6 +57,7 @@ input[type="password"] {
     transition: border-color var(--transition-speed) ease;
 }
 
+textarea,
 input[type="email"]::placeholder,
 input[type="text"]::placeholder,
 input[type="password"]::placeholder {
@@ -68,6 +70,8 @@ input[type="password"]:hover {
     border-color: var(--color-primary);
     outline: none;
 }
+
+
 
 button {
     border: 0.125rem solid transparent;
@@ -107,7 +111,8 @@ button:hover {
     }
 }
 
-.ToastError {
+#ToastSuccess,
+#ToastError {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -118,4 +123,8 @@ button:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     font-family: sans-serif;
     animation: fadeOut 1.5s forwards;
+}
+
+#ToastSuccess {
+    background-color: green !important;
 }

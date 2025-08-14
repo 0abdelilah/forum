@@ -12,7 +12,27 @@ import (
 
 func main() {
 	// prepare database
-	database.CreateDB()
+	err := database.InitDB()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = database.CreateUsersTable()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = database.CreatePostsTable()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = database.CreateCommentsTable()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// start mux
 	mux := http.NewServeMux()
@@ -26,7 +46,12 @@ func main() {
 	mux.HandleFunc("POST /login", auth.LoginHandler)
 	mux.HandleFunc("GET /logout", auth.LogoutHandler)
 
+	// authenticated patterns
+	mux.HandleFunc("POST /create-post", handlers.CreatePHandler)
+	mux.HandleFunc("GET /load-posts", handlers.LoadPostsHandler)
+	mux.HandleFunc("POST /comment", handlers.CmntHandler)
+
 	// start server
-	fmt.Println("started listening at http://localhost:8080/auth#register")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("started listening at http://localhost:8081/auth#register")
+	log.Fatal(http.ListenAndServe(":8081", mux))
 }

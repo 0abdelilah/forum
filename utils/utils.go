@@ -7,36 +7,37 @@ import (
 )
 
 func ErrorHandler(w http.ResponseWriter, text string, code int) {
-	if code != 404 {
-		fmt.Println("Error:", text)
-	}
-
 	t, err := template.ParseFiles("./templates/error.html")
 	if err != nil {
-		http.Error(w, text, code)
+		fmt.Println(err)
 		return
 	}
 
 	w.WriteHeader(code)
-	t.Execute(w, struct{ ErrorText string }{ErrorText: text})
+	err = t.Execute(w, struct{ Error string }{Error: text})
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func ToastError(w http.ResponseWriter, text string, hash string) {
 	tmpt, err := template.ParseFiles("./templates/auth.html")
 	if err != nil {
-		ErrorHandler(w, "Internal server error", 500)
+		fmt.Println(err)
+		http.Error(w, "Internal server error", 500)
 		return
 	}
 
 	err = tmpt.Execute(w, struct {
-		Text string
-		Hash string
+		Error string
+		Hash  string
 	}{
-		Text: text,
-		Hash: hash,
+		Error: text,
+		Hash:  hash,
 	})
 	if err != nil {
-		ErrorHandler(w, "Internal server error", 500)
+		fmt.Println(err)
+		http.Error(w, "Internal server error", 500)
 		return
 	}
 }

@@ -29,7 +29,7 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpt, err := template.ParseFiles("./templates/dashboard.html")
 	if err != nil {
-		utils.ErrorHandler(w, "Internal server error", 500)
+		http.Error(w, "Internal server error", 500)
 		return
 	}
 
