@@ -12,15 +12,6 @@ type UserData struct {
 	Authenticated bool
 }
 
-type Post struct {
-	Img          string
-	Title        string
-	Desctiption  string
-	LikeCount    string
-	Comments     map[string]string // k: user; v: comment
-	CommentCount int
-}
-
 func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		utils.ErrorHandler(w, "This page does not exist.", 404)

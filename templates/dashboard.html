@@ -7,18 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-
 <body class="dashboard-page">
     <div class="navbar">
         <h2>For<span class="highlight">um</span></h2>
-        <!-- Drop down -->
-        <label>Filter by:</label>
-
-        <select name="filter" id="filter" onchange="Filter(this.value);">
-            <option value="category">Category</option>
-            <option value="posts">My Posts</option>
-            <option value="liked">Liked Posts</option>
-        </select>
 
         <div class="usermenu" tabindex="0">
             {{if .Authenticated}}
@@ -36,12 +27,11 @@
         </div>
     </div>
 
-
     <div class="create-post">
         <input type="checkbox" id="show">
 
         {{if .Authenticated}}
-        <label for="show">What's on your mind, {{.Name}}?</label>
+        <label for="show" data-name="{{.Name}}">What's on your mind, {{.Name}}?</label>
         {{else}}
         <label for="unauth" onclick="window.location='/auth#login'">Login to create posts</label>
         {{end}}
@@ -62,6 +52,85 @@
         </div>
     </div>
 
-    <div class="posts"></div>
+
+    <div class="bottom">
+        <div class="prefrences">
+
+            <h3>Filter</h3>
+            <div class="categories">
+                <label>
+                    <input type="radio" name="categories" value="mine" onchange="setCategory(this.value)">
+                    <span>
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        My Posts
+                    </span>
+                </label>
+
+                <label>
+                    <input type="radio" name="categories" value="liked" onchange="setCategory(this.value)">
+                    <span>
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        Liked posts
+                    </span>
+                </label>
+            </div>
+
+            <h4>Categories</h4>
+            <div class="categories">
+                <label>
+                    <input type="radio" name="categories" value="all" onchange="setCategory(this.value)">
+                    <span>
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        All categories
+                    </span>
+                </label>
+
+                <label>
+                    <input type="radio" name="categories" value="programming" onchange="setCategory(this.value)">
+                    <span>
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        Programming</span>
+                </label>
+
+
+                <label>
+                    <input type="radio" name="categories" value="music" onchange="setCategory(this.value)">
+                    <span>
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        Music</span>
+                </label>
+
+                <label>
+                    <input type="radio" name="categories" value="gaming" onchange="setCategory(this.value)">
+                    <span>
+
+                        <svg class="icon" viewBox="0 0 24 24" width="13" height="13" fill="none">
+                            <path d="M5 14C5 14 7 14.5 8.5 17.5C8.5 17.5 14.0588 8.33333 19 6.5" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        Gaming</span>
+                </label>
+            </div>
+
+
+        </div>
+
+        <div class="posts"></div>
+    </div>
     <script>loadPosts();</script>
 </body>

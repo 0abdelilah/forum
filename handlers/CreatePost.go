@@ -17,8 +17,8 @@ func CreatePHandler(w http.ResponseWriter, r *http.Request) {
 	if !exist {
 		w.WriteHeader(403)
 		json.NewEncoder(w).Encode(map[string]string{
+			"error":   "Please log in",
 			"success": "false",
-			"error":   "Plesae log in",
 		})
 		return
 	}
@@ -66,7 +66,7 @@ func CreatePHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = database.CreatePost(PostUUID, username, creationDate, category, title, content)
+	err = database.CreatePost(PostUUID, username, creationDate, title, content, category)
 	if err != nil {
 		fmt.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)

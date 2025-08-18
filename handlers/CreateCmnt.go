@@ -16,7 +16,7 @@ func CmntHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(403)
 		json.NewEncoder(w).Encode(map[string]string{
 			"success": "false",
-			"error":   "Plesae log in",
+			"error":   "Please log in",
 		})
 		return
 	}
@@ -39,7 +39,7 @@ func CmntHandler(w http.ResponseWriter, r *http.Request) {
 	PostUUID := CommentData.PostUUID
 	content := Sanitize(CommentData.Content)
 	Username := sess.Username
-	creationDate := time.Now().Format("2006-01-02T15:04:05.000000000Z07:00")
+	commentDate := time.Now().Format("2006-01-02T15:04:05.000000000Z07:00")
 
 	if valid, msg := isValidComment(content); !valid {
 		w.WriteHeader(http.StatusBadRequest)
@@ -50,7 +50,7 @@ func CmntHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = database.CreateComment(Username, creationDate, content, PostUUID)
+	err = database.CreateComment(PostUUID, Username, commentDate, content)
 	if err != nil {
 		fmt.Println(err)
 		w.WriteHeader(http.StatusBadRequest)

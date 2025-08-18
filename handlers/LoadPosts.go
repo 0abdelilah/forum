@@ -20,7 +20,6 @@ func LoadPostsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
 	err := database.LoadPosts(category)
 	if err != nil {
 		fmt.Println(err)

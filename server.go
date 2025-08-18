@@ -34,6 +34,12 @@ func main() {
 		return
 	}
 
+	err = database.CreateReactsTable()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// start mux
 	mux := http.NewServeMux()
 
@@ -50,6 +56,7 @@ func main() {
 	mux.HandleFunc("POST /create-post", handlers.CreatePHandler)
 	mux.HandleFunc("GET /load-posts", handlers.LoadPostsHandler)
 	mux.HandleFunc("POST /comment", handlers.CmntHandler)
+	mux.HandleFunc("POST /react", handlers.ReactHandler)
 
 	// start server
 	fmt.Println("started listening at http://localhost:8081/auth#register")

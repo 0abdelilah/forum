@@ -1,53 +1,28 @@
+////////////////////
+// Authentication //
+////////////////////
 
-// Appeler au chargement
-window.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.startsWith('/auth')) {
-        checkHash();
-    } else if (window.location.pathname == '/') {
-    }
-});
+window.addEventListener('DOMContentLoaded', checkHash);
+window.addEventListener('hashchange', checkHash)
 
-// Appeler à chaque changement de hash
-window.addEventListener('hashchange', checkHash);
-
-function CreatePost() {
-    title = document.getElementById('title').value
-    content = document.getElementById('content').value
-    category = document.getElementById('category').value
-
-    fetch("/create-post", {
-        method: "POST",
-        body: JSON.stringify({ title, content, category }),
-    })
-        .then(res => res.json())
-        .then(responseData => {
-            if (responseData.success === "true") {
-                window.location.reload();
-                showToast("Created post");
-            } else {
-                showToast(responseData.error, "error");
-            }
-        })
-        .catch(err => {
-            console.error('Login error:', err);
-        });
-}
-
+// if hash is #login -> display login & hide register and vice versa 
 function checkHash() {
-    hash = window.location.hash;
+    if (window.location.pathname.startsWith('/auth')) {
 
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
+        hash = window.location.hash;
 
-    if (hash === "#register") {
-        registerForm.style.setProperty('display', 'block');
-        loginForm.style.setProperty('display', 'none', 'important');
-    } else {
-        loginForm.style.setProperty('display', 'block');
-        registerForm.style.setProperty('display', 'none', 'important');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        if (hash === "#register") {
+            registerForm.style.setProperty('display', 'block');
+            loginForm.style.setProperty('display', 'none', 'important');
+        } else {
+            loginForm.style.setProperty('display', 'block');
+            registerForm.style.setProperty('display', 'none', 'important');
+        }
     }
 }
-
 
 function Login() {
     username = document.getElementById('username').value
@@ -93,8 +68,220 @@ function Register() {
         });
 }
 
+// will display based on param set by setCategory
+function formatDate(dateString) {
+    return dateString.substring(0, 10);
+}
+
+function renderComment(comment) {
+    return `
+        <div class="comment">
+            <p class="comment-meta"><strong>${comment.Username}</strong> • ${formatDate(comment.Date)}</p>
+            <p class="comment-content">${comment.Content}</p>
+        </div>
+    `;
+}
+
+function renderPost(post) {
+    const commentsHTML = (post.Comments || []).map(renderComment).join('');
+
+    const postDiv = document.createElement('div');
+    postDiv.className = 'post';
+    postDiv.innerHTML = `
+        <div class="post-header">
+            <img src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg" />
+            <div class="author-info">
+                <h3>${post.Username}</h3>
+                <p class="meta">${formatDate(post.CreationDate)} • ${post.Category}</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <h3 class="post-title">${post.Title}</h3>
+            <pre>${post.Content}</pre>
+        </div>
+
+        <h4>Comments</h4>
+        <div class="comments">${commentsHTML}</div>
+
+        <textarea id="commentArea-${post.PostUUID}" placeholder="Write a comment..."></textarea>
+        <button class="comment-btn" data-id="${post.PostUUID}">Post Comment</button>
+        
+        <div class="react">
+            <button class="like-btn" data-id="${post.PostUUID}">${post.Reacts.Likes.Amount} - Like</button>
+            <button class="dislike-btn" data-id="${post.PostUUID}">${post.Reacts.Dislikes.Amount} - Dislike</button>
+        </div>
+    `;
+    return postDiv;
+}
+
+// render like & dislike buttons (unused)
+function renderSvg(react) {
+    if (react == 'like') {
+        return
+    }
+}
+
+// helper for loadPosts
+// sets category param given by argument 
+function setCategory(category) {
+    const url = new URL(window.location);
+
+    if (category === "all") {
+        url.searchParams.delete("category"); // Remove the category param entirely
+    } else {
+        url.searchParams.set("category", category);
+    }
+
+    // Update the address bar without reloading
+    history.replaceState(null, "", url);
+
+    loadPosts();
+}
+
+// helper function to extact name from html
+function getUsername() {
+    const name = document.querySelector('label[for="show"]').dataset.name;
+    if (name) {
+        return name;
+    }
+    showToast("Login to see this category", "error")
+}
+
+function showSelected() {
+    const params = new URLSearchParams(window.location.search);
+    let category = params.get("category");
+
+    // hide all
+    const radios = document.querySelectorAll(`input[type="radio"]`);
+
+    radios.forEach(radio => {
+
+        // hide all
+        const icon = radio.nextElementSibling.querySelector('svg.icon');
+        icon.style.display = 'none';
+
+        if (!category) {
+            category = "all"
+        }
+
+        const checked = document.querySelector(`input[type="radio"][value="${category}"]`);
+        const checkedicon = checked.nextElementSibling.querySelector('svg.icon');
+        checkedicon.style.display = 'inline-block';
+    })
+}
+
+function loadPosts() {
+
+    showSelected()
+    const postsContainer = document.querySelector('.posts');
+    postsContainer.innerHTML = '';
+
+    const params = new URLSearchParams(window.location.search);
+    let category = params.get("category");
+
+    if (category) {
+        const allowed = ["mine", "liked", "programming", "music", "gaming"];
+        if (!allowed.includes(category)) {
+            showToast("Category doesn't exist", "error");
+            category = null;
+        }
+    }
+
+    let username;
+    if (category === "mine" || category === "liked") {
+        username = getUsername();
+        if (!username) return;
+    }
+
+    fetch('/load-posts')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success !== "true") {
+                showToast(data.error, "error");
+                return;
+            }
+
+            const posts = data.posts || [];
+            let filteredPosts = posts;
+
+            if (category === "mine") {
+                filteredPosts = posts.filter(p => p.Username === username);
+            } else if (category === "liked") {
+                // posts dont have likes (null)
+                filteredPosts = posts.filter(post => (post.Reacts.Likes.Usernames || []).includes(username));
+            } else if (category) {
+                filteredPosts = posts.filter(p => p.Category === category);
+            }
+
+            if (!filteredPosts.length) {
+                postsContainer.textContent = "No posts available.";
+                return;
+            }
+
+            const fragment = document.createDocumentFragment(); // create a mini dom 
+            filteredPosts.forEach(post => fragment.appendChild(renderPost(post))); // append posts to it
+            postsContainer.appendChild(fragment);
+
+            // Event listeners
+            postsContainer.querySelectorAll('.comment-btn').forEach(btn =>
+                btn.addEventListener('click', () => comment(btn.dataset.id))
+            );
+            postsContainer.querySelectorAll('.like-btn').forEach(btn =>
+                btn.addEventListener('click', () => react(btn.dataset.id, 'like'))
+            );
+            postsContainer.querySelectorAll('.dislike-btn').forEach(btn =>
+                btn.addEventListener('click', () => react(btn.dataset.id, 'dislike'))
+            );
+        })
+        .catch(err => {
+            console.error("Load posts error:", err);
+            showToast("Could not load posts", "error");
+        });
+}
+
+function react(PostUUID, reaction) {
+    fetch("/react", {
+        method: 'POST',
+        body: JSON.stringify({ PostUUID, reaction }),
+    })
+        .then(res => res.json())
+        .then(responseData => {
+            if (responseData.success == "true") {
+                showToast("Reacted to post");
+                loadPosts();
+            } else {
+                console.log(responseData.error)
+                showToast(responseData.error, "error");
+            }
+        })
+}
+
+function CreatePost() {
+    title = document.getElementById('title').value
+    content = document.getElementById('content').value
+    category = document.getElementById('category').value
+
+    fetch("/create-post", {
+        method: "POST",
+        body: JSON.stringify({ title, content, category }),
+    })
+        .then(res => res.json())
+        .then(responseData => {
+            if (responseData.success === "true") {
+                window.location.reload();
+                showToast("Created post");
+            } else {
+                showToast(responseData.error, "error");
+            }
+        })
+        .catch(err => {
+            console.error('Login error:', err);
+        });
+}
+
 function comment(PostUUID) {
-    const content = document.getElementById("commentArea-"+PostUUID).value;
+    const content = document.getElementById("commentArea-" + PostUUID).value;
 
     fetch('/comment', {
         method: 'POST',
@@ -109,77 +296,10 @@ function comment(PostUUID) {
                 window.location.reload();
                 showToast("Commented successfully");
             } else {
-                showToast(responseData.error);
+                showToast(responseData.error, "error");
             }
         })
 }
-
-function loadPosts() {
-    const postsContainer = document.getElementsByClassName('posts')[0];
-
-    fetch('/load-posts')
-        .then(res => res.json())
-        .then(responseData => {
-            if (responseData.success === "true") {
-                const fragment = document.createDocumentFragment();
-
-                responseData.posts.forEach(post => {
-                    const CreationDate = post.CreationDate.substring(0, 10);
-
-                    const postDiv = document.createElement('div');
-                    postDiv.className = 'post';
-
-                    // Build comments HTML
-                    let commentsHTML = '';
-                    if (post.Comments && post.Comments.length > 0) {
-                        post.Comments.forEach(c => {
-                            const commentDate = c.Date.substring(0, 10);
-                            commentsHTML += `
-                            <div class="comment">
-                                <p class="comment-meta"><strong>${c.Username}</strong> • ${commentDate}</p>
-                                <p class="comment-content">${c.Content}</p>
-                            </div>
-                            `;
-                        });
-                    }
-
-                    // Build post HTML
-                    postDiv.innerHTML = `
-                    <div class="post-header">
-                        <img src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg" />
-                        <div class="author-info">
-                            <h3>${post.Username}</h3>
-                            <p class="meta">${CreationDate} • ${post.Category}</p>
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <h3 class="post-title">${post.Title}</h3>
-                        <pre>${post.Content}</pre>
-                    </div>
-
-                    <h4>Comments</h4>
-                    <div class="comments">
-                        ${commentsHTML}
-                    </div>
-
-                    <textarea id="commentArea-${post.PostUUID}" placeholder="Write a comment..."></textarea>
-                    <button onclick="comment('${post.PostUUID}');">Post Comment</button>
-                `;
-
-                    fragment.appendChild(postDiv);
-                });
-
-
-
-                postsContainer.appendChild(fragment);
-            } else {
-                console.log("error", responseData)
-                showToast(responseData.error, "error");
-            }
-        });
-}
-
 
 function showToast(message, state = "success") {
     // state can be "success" or "error"

@@ -71,3 +71,15 @@ func CreateCommentsTable() error {
 
 	return err
 }
+
+func CreateReactsTable() error {
+	_, err := db.Exec(`
+        CREATE TABLE IF NOT EXISTS reacts (
+		PostUUID TEXT NOT NULL,
+		username TEXT NOT NULL,
+		reactType TEXT NOT NULL,
+		UNIQUE(PostUUID, username)
+	)
+    `)
+	return err
+}

@@ -1,4 +1,4 @@
-## **Header / Navigation Bar**
+## **Header / Navigation Bar** //
 
 * **Logout button** (only visible when logged in)
 * **Login & Register buttons** (only visible when logged out)
@@ -10,7 +10,7 @@
 
 ---
 
-## **Home / Main Page**
+## **Home / Main Page** //
 
 * **List of posts** (visible to everyone)
 
@@ -33,7 +33,7 @@
 
 ---
 
-## **Authentication Pages**
+## **Authentication Pages**   //
 
 * **Login page**
 
@@ -43,7 +43,7 @@
 * **Register page**
 
   * Email (error if already taken)
-  * Username (error if already taken)
+  * Username 
   * Password (encrypted in DB)
   * Password strength check
 

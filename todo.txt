@@ -1,17 +1,15 @@
-add cmnt & like & dislike
-
-sanitize comments
-
-finish:
-    fix ui to fit phones
-
-add filter category ->
-By category (available to everyone)
-By "My Posts" (only for logged-in users)
-By "Liked Posts" (only for logged-in users)
-
-and post in category
-
 add "show more" to comments & posts content
 
+stylize category choosing
 
+create post page
+
+Category selection (multi-select possible)
+
+encrypt passwords
+
+move creat post to its page
+
+dockerize
+
+fix ui to fit phones

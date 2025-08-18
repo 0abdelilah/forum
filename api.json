@@ -1,0 +1,370 @@
+{
+    "posts": [
+        {
+            "PostUUID": "post_f277a231-a37e-4c95-9d56-95e64d5ed8d9",
+            "Username": "admin",
+            "CreationDate": "2025-08-15T12:22:52.267588084+01:00",
+            "Title": "ff",
+            "Content": "aa",
+            "Category": "programming",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 1,
+                    "Usernames": [
+                        "admin"
+                    ]
+                },
+                "PostUUID": "post_f277a231-a37e-4c95-9d56-95e64d5ed8d9"
+            }
+        },
+        {
+            "PostUUID": "post_6132ea0b-3b8e-4c50-ae77-8730ac481020",
+            "Username": "admin",
+            "CreationDate": "2025-08-15T11:57:05.329598792+01:00",
+            "Title": "ggrg",
+            "Content": "ddae",
+            "Category": "gaming",
+            "Comments": [
+                {
+                    "Username": "2025-08-15T12:08:51.290721409+01:00",
+                    "Date": "eff",
+                    "Content": "admin"
+                },
+                {
+                    "Username": "2025-08-15T12:09:44.020077912+01:00",
+                    "Date": "rr",
+                    "Content": "admin"
+                },
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:10:35.474920003+01:00",
+                    "Content": "arre"
+                },
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:22:42.980915186+01:00",
+                    "Content": "ee"
+                },
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:30:33.472296742+01:00",
+                    "Content": "hu"
+                }
+            ],
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_6132ea0b-3b8e-4c50-ae77-8730ac481020"
+            }
+        },
+        {
+            "PostUUID": "post_6470db83-6f80-4c4f-8cff-b561b58283c0",
+            "Username": "admin",
+            "CreationDate": "2025-08-15T11:56:58.137172182+01:00",
+            "Title": "arr",
+            "Content": "gg",
+            "Category": "gaming",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_6470db83-6f80-4c4f-8cff-b561b58283c0"
+            }
+        },
+        {
+            "PostUUID": "post_8e390212-90f6-4898-b5a1-61a384f4adaa",
+            "Username": "admin",
+            "CreationDate": "2025-08-15T00:02:02.169209571+01:00",
+            "Title": "arr",
+            "Content": "gg",
+            "Category": "music",
+            "Comments": [
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:22:48.437583134+01:00",
+                    "Content": "rr"
+                },
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:22:50.036434376+01:00",
+                    "Content": "az"
+                }
+            ],
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_8e390212-90f6-4898-b5a1-61a384f4adaa"
+            }
+        },
+        {
+            "PostUUID": "post_8696818c-493f-41a5-95bf-d336d9ad39b3",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:59:47.874562056+01:00",
+            "Title": "ett",
+            "Content": "tt",
+            "Category": "programming",
+            "Comments": [
+                {
+                    "Username": "admin",
+                    "Date": "2025-08-15T12:11:03.827089209+01:00",
+                    "Content": "rra"
+                }
+            ],
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_8696818c-493f-41a5-95bf-d336d9ad39b3"
+            }
+        },
+        {
+            "PostUUID": "post_fb64f915-f98f-4660-9cbf-878a069b5ba1",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:59:36.610774214+01:00",
+            "Title": "programming",
+            "Content": "aff",
+            "Category": "ff",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_fb64f915-f98f-4660-9cbf-878a069b5ba1"
+            }
+        },
+        {
+            "PostUUID": "post_018a7a74-db6d-4cd3-bd5f-be7efc987dbc",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:58:56.179430252+01:00",
+            "Title": "programming",
+            "Content": "rr",
+            "Category": "rr",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_018a7a74-db6d-4cd3-bd5f-be7efc987dbc"
+            }
+        },
+        {
+            "PostUUID": "post_4dcdb8c4-9357-4511-a0c2-4ebc892cffdc",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:58:12.299612095+01:00",
+            "Title": "programming",
+            "Content": "admin",
+            "Category": "admin",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_4dcdb8c4-9357-4511-a0c2-4ebc892cffdc"
+            }
+        },
+        {
+            "PostUUID": "post_faa4b044-84b4-4bf6-9ae9-f72193d04df6",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:57:50.060097022+01:00",
+            "Title": "programming",
+            "Content": "hh",
+            "Category": "hh",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_faa4b044-84b4-4bf6-9ae9-f72193d04df6"
+            }
+        },
+        {
+            "PostUUID": "post_2e0bb053-3214-4ac0-acfb-bc830aa7d66e",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:56:45.644675936+01:00",
+            "Title": "programming",
+            "Content": "gg",
+            "Category": "gg",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_2e0bb053-3214-4ac0-acfb-bc830aa7d66e"
+            }
+        },
+        {
+            "PostUUID": "post_52b3522c-530f-4aed-b5ba-261ff2bd4e4b",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:55:47.789504696+01:00",
+            "Title": "programming",
+            "Content": "aa",
+            "Category": "rr",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_52b3522c-530f-4aed-b5ba-261ff2bd4e4b"
+            }
+        },
+        {
+            "PostUUID": "post_e904d32f-8ae6-44d6-b7d1-56d4fc4e514b",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:53:00.094617513+01:00",
+            "Title": "programming",
+            "Content": "aerf",
+            "Category": "ff",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_e904d32f-8ae6-44d6-b7d1-56d4fc4e514b"
+            }
+        },
+        {
+            "PostUUID": "post_4904e025-d9d8-4c61-9587-601dcde1c73d",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:52:53.878627479+01:00",
+            "Title": "programming",
+            "Content": "aa",
+            "Category": "rr",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_4904e025-d9d8-4c61-9587-601dcde1c73d"
+            }
+        },
+        {
+            "PostUUID": "post_d42ab706-619f-402e-8016-d463f7741d8d",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:52:04.878821586+01:00",
+            "Title": "programming",
+            "Content": "aa",
+            "Category": "aa",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_d42ab706-619f-402e-8016-d463f7741d8d"
+            }
+        },
+        {
+            "PostUUID": "post_57a2acbf-d288-4f46-8488-0f79dce041ae",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:51:33.543040279+01:00",
+            "Title": "programming",
+            "Content": "arr",
+            "Category": "rr",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_57a2acbf-d288-4f46-8488-0f79dce041ae"
+            }
+        },
+        {
+            "PostUUID": "post_64403f4f-6bd7-4f5d-8dd6-4ea48f0c47d2",
+            "Username": "admin",
+            "CreationDate": "2025-08-14T23:50:44.639313253+01:00",
+            "Title": "programming",
+            "Content": "aa",
+            "Category": "rr",
+            "Comments": null,
+            "Reacts": {
+                "Likes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "Dislikes": {
+                    "Amount": 0,
+                    "Usernames": null
+                },
+                "PostUUID": "post_64403f4f-6bd7-4f5d-8dd6-4ea48f0c47d2"
+            }
+        }
+    ],
+    "success": "true"
+}
